@@ -11,7 +11,7 @@ const Logout = () => {
     const tempLogout = async () => {
       try {
         console.log("before ApI calll");
-        const response = await axios.get('http://localhost:3000/user/api/logout', { withCredentials: true })
+        const response = await axios.get('http://localhost:5173/user/api/logout', { withCredentials: true })
         console.log("response is ", response.data.message);
         localStorage.removeItem("token");
         localStorage.removeItem("user");

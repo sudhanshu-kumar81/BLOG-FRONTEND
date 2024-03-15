@@ -67,7 +67,7 @@ const Comments = ({ post }) => {
         try {
             console.log("entered add comment");
             console.log(comment);
-            const response = await axios.post('http://localhost:3000/user/api/addComment', comment, {
+            const response = await axios.post('http://localhost:5173/user/api/addComment', comment, {
                 withCredentials: 'true'
             })
             // console.log("response");
@@ -88,7 +88,7 @@ const Comments = ({ post }) => {
     useEffect(() => {
         const getALLComments = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/user/api/showAllComments', {
+                const response = await axios.get('http://localhost:5173/user/api/showAllComments', {
                     params: {
                         _id: post?._id
                     },

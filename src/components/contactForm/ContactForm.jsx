@@ -25,7 +25,7 @@ const ContactPage = () => {
     useEffect(()=>{
         const getEmail=async()=>{
          try{
-            const response=await axios.get('http://localhost:3000/user/api/getDetails',{
+            const response=await axios.get('http://localhost:5173/user/api/getDetails',{
                 withCredentials:true
             })
          setFormData(pre=>({...pre, name: response.data.user.name,
@@ -58,7 +58,7 @@ const ContactPage = () => {
     e.preventDefault();
     // console.log('Form submitted:', formData);
     try{
-   const response=await axios.post('http://localhost:3000/user/api/saveSuggestion',formData,{
+   const response=await axios.post('http://localhost:5173/user/api/saveSuggestion',formData,{
     withCredentials:true
    })
   //  console.log("response is ",response);

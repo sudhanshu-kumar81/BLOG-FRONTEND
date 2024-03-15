@@ -70,7 +70,7 @@ const changeSignupHandler=(e)=>{
     const signupHandler=async(e)=>{
         try {
             // e.preventDefault();
-            const response = await axios.post('http://localhost:3000/user/api/register',formData);
+            const response = await axios.post('http://localhost:5173/user/api/register',formData);
             console.log("response is ",response);
             console.log(response);
            if(response.data.success===true) {toast.success(response.data.message)
@@ -94,7 +94,7 @@ const changeSignupHandler=(e)=>{
     const LoginHandler=async(e)=>{
         try {
             // e.preventDefault();
-            const response = await axios.post('http://localhost:3000/user/api/login',formData,{
+            const response = await axios.post('http://localhost:5173/user/api/login',formData,{
                 withCredentials: true
               });
             console.log("response is ",response);

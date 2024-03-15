@@ -61,7 +61,7 @@ const Createpost = () => {
           const formData = new FormData();
           console.log("formData is ",formData.avatar);
       formData.append('avatar', file);
-      const response = await axios.post('http://localhost:3000/user/api/profile', formData, {
+      const response = await axios.post('http://localhost:5173/user/api/profile', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -108,7 +108,7 @@ const Createpost = () => {
     try{
       console.log("arrived in publish handler");
     console.log("userderails ae",userDetails);
-     const response=await axios.post('http://localhost:3000/user/api/savepost',userDetails,{
+     const response=await axios.post('http://localhost:5173/user/api/savepost',userDetails,{
       withCredentials:true
      })
      console.log("response",response);

@@ -76,7 +76,7 @@ const DetailsView = () => {
     useEffect(()=>{
      const getPosts=async()=>{
      try{
-       const response=await axios.get('http://localhost:3000/user/api/postDetails',{
+       const response=await axios.get('http://localhost:5173/user/api/postDetails',{
         params:{
             _id:id
         },

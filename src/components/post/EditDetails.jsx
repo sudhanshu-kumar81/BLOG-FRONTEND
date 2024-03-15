@@ -58,7 +58,7 @@ const  EditDetails = () => {
           const formData = new FormData();
           console.log("formData is ",formData.avatar);
       formData.append('avatar', file);
-      const response = await axios.post('http://localhost:3000/user/api/profile', formData, {
+      const response = await axios.post('http://localhost:5173/user/api/profile', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -105,7 +105,7 @@ const  EditDetails = () => {
     try{
     //   console.log("arrived in update handler");
     // console.log("userderails ae",userDetails);
-     const response=await axios.post('http://localhost:3000/user/api/updatepost',userDetails,{
+     const response=await axios.post('http://localhost:5173/user/api/updatepost',userDetails,{
       withCredentials:true,
         params:{
             _id:id
@@ -130,7 +130,7 @@ const  EditDetails = () => {
   useEffect(()=>{
     const EditData=async()=>{
      try{
-      const response=await axios.get('http://localhost:3000/user/api/edit',{
+      const response=await axios.get('http://localhost:5173/user/api/edit',{
         params:{
             _id:id
         },

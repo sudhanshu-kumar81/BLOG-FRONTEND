@@ -14,7 +14,7 @@ const Posts = () => {
     console.log("category is ",category);
     const getAllPost = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/user/api/getAllPosts',{
+        const response = await axios.get('http://localhost:5173/user/api/getAllPosts',{
           params: {
             category: category
           },
