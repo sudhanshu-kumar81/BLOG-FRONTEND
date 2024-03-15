@@ -10,7 +10,7 @@ const Delete = () => {
     useEffect(()=>{
    const DeletePost=async()=>{
     try{
-    const response=await axios.get('http://localhost:5173/user/api/delete',{
+    const response=await axios.get('https://blog-backend-2-913v.onrender.com/user/api/delete',{
         params:{
             _id:id
         },

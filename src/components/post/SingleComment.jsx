@@ -37,7 +37,7 @@ const SingleComment = ({comment,setToggle}) => {
     const {user}=useContext(UserContext)
     const deleteHandler=async(e)=>{
        try{
-    const response=await axios.get('http://localhost:5173/user/api/deleteComment',{
+    const response=await axios.get('https://blog-backend-2-913v.onrender.com/user/api/deleteComment',{
         params:{
         _id:id
         },

@@ -30,7 +30,7 @@ const Navbar = () => {
   useEffect(() => {
     const isLogin = async () => {
       try {
-        const response = await axios.get('http://localhost:5173/user/api/Islogin', {
+        const response = await axios.get('https://blog-backend-2-913v.onrender.com/user/api/Islogin', {
           withCredentials: true
         })
         console.log("response is ", response);
