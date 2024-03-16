@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { styled } from '@mui/system'
 const Container = styled(Box)(({ theme }) => ({
     width: '80vw',
-    backgroundColor:'red',
+    // backgroundColor:'red',
     justifyItems:'center',
     margin:'auto',
     [theme.breakpoints.down('sm')]: {
