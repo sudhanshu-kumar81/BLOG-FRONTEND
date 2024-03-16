@@ -92,6 +92,7 @@ const changeSignupHandler=(e)=>{
           }
     }
     const LoginHandler=async(e)=>{
+        console.log("arrived in login")
         try {
             // e.preventDefault();
             const response = await axios.post('https://blog-backend-2-913v.onrender.com/user/api/login',formData,{

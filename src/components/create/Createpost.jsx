@@ -6,11 +6,13 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 const Container = styled(Box)(({ theme }) => ({
   margin: '10px 100px',
+  
   [theme.breakpoints.down('md')]: {
-      margin: 0,
+      margin: '5px',
   }
 }));
 const Image = styled('img')({
+  borderRadius:'20px',
   padding:'5px',
   width: '100%',
   height: '50vh',
@@ -26,7 +28,9 @@ const StyledFormControl = styled(FormControl)(({theme})=>({
     margin: 0,
     display:'flex',
     flexDirection:'column',
-    
+    '& #plus': {
+     marginLeft:'40px'
+    },
 }
 
 }))
@@ -132,15 +136,15 @@ const Createpost = () => {
       <Image src={userDetails.avatar?userDetails.avatar:url}></Image>
       <StyledFormControl>
         <label htmlFor='fileInput'>
-          <AddCircleIcon fontSize='large' color='action' style={{marginLeft:'10px'}}/>
+          <AddCircleIcon id="plus" fontSize='large' color='action' style={{marginLeft:'10px'}}/>
         </label>
         <input id='fileInput' onChange={changefileHandler} type='file' style={{ display: 'none' }}>
         </input>
         <InputTextField placeholder='title'  name='title' onChange={changeHandler}/>
        
       </StyledFormControl>
-      <StyledTextareaAutosize  onChange={changeHandler} name='description' minRows={3} placeholder='tell your story...' />
-      <Box  style={{display:'flex', justifyContent:'center'}}><Button variant="contained" onClick={publishHandler} >Publish</Button></Box>
+      <StyledTextareaAutosize style={{padding:'10px', marginTop:'-3px'}} onChange={changeHandler} name='description' minRows={3} placeholder='tell your story...' />
+      <Box  style={{display:'flex', justifyContent:'center',margin:'2px'}}><Button variant="contained" onClick={publishHandler} >Publish</Button></Box>
     </Container>
   )
 }

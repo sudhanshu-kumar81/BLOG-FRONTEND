@@ -83,8 +83,8 @@ const Navbar = () => {
         <div className="hidden grow items-start lg:flex">
           <ul className="ml-12 inline-flex space-x-8 p-5">
             {menuItems.map((item) => (
-              <NavLink to={`${item.href}`} >
-                <li className="text-sm font-bold text-gray-800 hover:text-gray-900">
+              <NavLink  to={`${item.href}`} key={`${item.name}`} >
+                <li className="text-sm font-bold text-gray-800 hover:text-gray-900 ">
                   {item.name}
                 </li>
               </NavLink>
