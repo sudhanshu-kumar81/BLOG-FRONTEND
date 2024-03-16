@@ -39,6 +39,7 @@ function App() {
       <Route path='/edit/:id' element={<EditDetails/>}/>
       <Route path='/delete/:id' element={<Delete/>}/>
       <Route path='/comment/:id' element={<Delete/>}/>
+      <Route path='/*' element={<Home/>}/>
      
     </Routes>
     </>
