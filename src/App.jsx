@@ -25,7 +25,7 @@ function App() {
     <>
     {
       
-      (login)?(<Navbar/>):(<></>)
+      (login)?(<Navbar/>):(<Login/>)
     }
     
     <Routes>
