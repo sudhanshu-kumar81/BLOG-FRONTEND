@@ -47,7 +47,7 @@ const  EditDetails = () => {
     const {id}=useParams();
     console.log("id is ",id);
   const navigate=useNavigate();
-     const { user } = useContext(UserContext)
+     const { user,setUser,setLogin } = useContext(UserContext)
   const [userDetails, setUserDetails] = useState({ title: "", description: "", avatar: "", username: "", categories: "" });
   const url = 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80'
   const [file, setFile] = useState('');
@@ -121,7 +121,9 @@ const  EditDetails = () => {
         toast.error(e.response.data.message)
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        navigate('/login')
+        setUser(null);
+        setLogin(false);
+        // navigate('/')
     }else{
         toast.error(e.response.data.message||e.message||"internal error");
     }
@@ -142,10 +144,12 @@ const  EditDetails = () => {
      }catch(e){
         // console.log("error in editing details are ",e);
         if(e.response.data.message==='missing token'){
-          toast.error(e.response.data.message)
+          toast.error("Login Again")
           localStorage.removeItem("token");
           localStorage.removeItem("user");
-          navigate('/login')
+          setUser(null)
+          setLogin(false)
+          // navigate('/')
       }else{
           toast.error(e.response.data.message||e.message||"internal error");
       }

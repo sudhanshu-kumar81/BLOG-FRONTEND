@@ -53,7 +53,7 @@ const SingleComment = ({ comment, setToggle }) => {
   const id = comment._id;
   console.log("id is", id);
 
-  const { user } = useContext(UserContext)
+  const { user,setUser,setLogin } = useContext(UserContext)
   const deleteHandler = async (e) => {
     try {
       const response = await axios.get('https://blog-backend-2-913v.onrender.com/user/api/deleteComment', {
@@ -67,10 +67,11 @@ const SingleComment = ({ comment, setToggle }) => {
     } catch (e) {
       console.log("e in deleting component", e);
       if (e.response.data.message === 'missing token') {
-        toast.error(e.response.data.message)
+        toast.error("Login to delete")
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        navigate('/login')
+        setLogin(false);
+        setUser(null);
       } else {
         toast.error(e.response.data.message || e.message || "internal error");
       }

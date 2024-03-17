@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { CategoryData } from '../../data.jsx'
 import { Table, TableRow, TableHead, TableCell, TableBody, Button } from '@mui/material'
 import { styled } from '@mui/system'
 import { NavLink } from 'react-router-dom'
 import { useSearchParams } from 'react-router-dom'
+import UserContext from '../../context/UserContext.jsx'
+import { toast } from 'react-toastify'
 const MyStyledTable = styled(Table)({
     border: '1px solid rgba(224,224,224,5)'
 });
@@ -14,16 +16,21 @@ const MyButton = styled(Button)({
 
 })
 const Category = () => {
+    const {login,setLogin,user,setUser}=useContext(UserContext);
     const [searchParams] = useSearchParams();
     const category = searchParams.get('category');
     const alertNoCategory = () => {
+        if(!login){
+            toast.error('login first');
+            return;
+        }
         if (!category) {
-            alert('Please select a category before creating a blog.');
+            toast.error('please select a category');
         }
     };
     return (
         <div>
-            <NavLink to={category ? `/create?create=${category}` : '/'} onClick={alertNoCategory}>
+            <NavLink onClick={alertNoCategory} to={(login&&category) ? `/create?create=${category}` : '/'}  >
                 <MyButton variant="contained">Create blog</MyButton>
             </NavLink>
             <MyStyledTable>

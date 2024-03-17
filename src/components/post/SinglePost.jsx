@@ -45,7 +45,7 @@ const SinglePost = ({post}) => {
         <Text>{post.categories}</Text>
         <Heading>{addElippsis(post.title,20)}</Heading>
         <Text>{post.username}</Text>
-        <Details>{addElippsis(post.title,100)}</Details>
+        <Details>{addElippsis(post.description,150)}</Details>
      </Container>
   )
 }

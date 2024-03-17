@@ -52,7 +52,7 @@ import { useContext } from 'react';
 import { toast } from 'react-toastify';
 const Createpost = () => {
   const navigate=useNavigate();
-     const { user } = useContext(UserContext)
+     const { user,login,setUser,setLogin } = useContext(UserContext)
   const location = useLocation();
   
   const [userDetails, setUserDetails] = useState({ title: "", description: "", avatar: "", username: "", categories: "" });
@@ -82,10 +82,11 @@ const Createpost = () => {
       } catch (e) {
         console.log("error is ", e);
         if(e.response.data.message==='missing token'){
-          toast.error(e.response.data.message)
+          toast.error("please Login Again");
           localStorage.removeItem("token");
-          localStorage.removeItem("user");
-          navigate('/login')
+           localStorage.removeItem("user");
+           setLogin(false)
+           setUser(null)
       }else{
           toast.error(e.response.data.message||e.message||"internal error");
       }
@@ -121,10 +122,11 @@ const Createpost = () => {
      navigate('/');
     }catch(e){
       if(e.response.data.message==='missing token'){
-        toast.error(e.response.data.message)
+        toast.error("please Login Again");
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        navigate('/login')
+        setLogin(false)
+        setUser(null)
     }else{
         toast.error(e.response.data.message||e.message||"internal error");
     }

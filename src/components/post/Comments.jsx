@@ -53,7 +53,7 @@ const Comments = ({ post }) => {
     const [toggle, setToggle] = useState(false)
     const [allComment, setAllComment] = useState([]);
     const navigate = useNavigate();
-    const { user } = useContext(UserContext);
+    const { login,setLogin,user,setUser} = useContext(UserContext);
     console.log("user is ", user);
     console.log("postId is ", post?._id);
     const [comment, setComment] = useState({ name: user, postId: post?._id, comments: '', date: new Date() })
@@ -76,10 +76,12 @@ const Comments = ({ post }) => {
         } catch (e) {
             // console.log("error is ", e);
             if (e.response.data.message === 'missing token') {
-                toast.error(e.response.data.message)
+                toast.error("Login To comment")
                 localStorage.removeItem("token");
                 localStorage.removeItem("user");
-                navigate('/login')
+                setLogin(false);
+                setUser(null)
+                // navigate('/')
             } else {
                 toast.error(e.response.data.message || e.message || "internal error");
             }
@@ -96,17 +98,9 @@ const Comments = ({ post }) => {
                 })
                 console.log("response is ", response);
                 setAllComment(response.data.comment)
-
             } catch (e) {
                 console.log("error is ", e);
-                if (e.response.data.message === 'missing token') {
-                    toast.error(e.response.data.message)
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("user");
-                    navigate('/login')
-                } else {
-                    toast.error(e.response.data.message || e.message || "internal error");
-                }
+                //  toast.error(e.response.data.message)   
             }
         }
         getALLComments()

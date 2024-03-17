@@ -22,10 +22,12 @@ const Delete = () => {
     }catch(e){
         console.log("error is ",e);
         if(e.response.data.message==='missing token'){
-          toast.error(e.response.data.message)
+          toast.error("Login First")
           localStorage.removeItem("token");
           localStorage.removeItem("user");
-          navigate('/login')
+          setLogin(false)
+          setUser(null)
+          // navigate('/login')
       }else{
           toast.error(e.response.data.message||e.message||"internal error");
       }

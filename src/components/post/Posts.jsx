@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { Box } from '@mui/system';
 import SinglePost from './SinglePost.jsx';
 import { Grid } from '@mui/material';
 import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 import {toast} from 'react-toastify'
+import UserContext from '../../context/UserContext.jsx';
 const Posts = () => {
+  const {setUser,setLogin}=useContext(UserContext)
   const [category,setCategory]=useState("");
   const [post, setPost]= useState([]);
   const [searchParams]=useSearchParams();
@@ -26,10 +28,12 @@ const Posts = () => {
       } catch (e) {
         console.log("error is ", e);
         if(e.response.data.message==='missing token'){
-          toast.error(e.response.data.message)
+          // toast.error(e.response.data.message)
           localStorage.removeItem("token");
           localStorage.removeItem("user");
-          navigate('/login')
+          setUser(null);
+          setLogin(false)
+          // navigate('/login')
       }else{
           toast.error(e.response.data.message||e.message||"internal error");
       }

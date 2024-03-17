@@ -14,20 +14,18 @@ import EditDetails from './components/post/EditDetails.jsx'
 import Delete from './components/post/Delete.jsx'
 import ContactForm from './components/contactForm/ContactForm.jsx'
 function App() {
-  const {login,setLogin}=useContext(UserContext)
+  const {login,setLogin,setUser,user}=useContext(UserContext)
   useEffect(()=>{
     const data=localStorage.getItem("token")
+    const data2=localStorage.getItem("user")
     if(data){
       setLogin(true)
+      setUser(data2)
     }
-  },[])
+  },[login])
   return (
     <>
-    {
-      
-      (login)?(<Navbar/>):(<Login/>)
-    }
-    
+     <Navbar/>
     <Routes>
       <Route path='/contact' element={<ContactForm/>}></Route>
       <Route path='/create' element={<Createpost/>}/>

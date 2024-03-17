@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import {  useNavigate } from 'react-router-dom';
+import UserContext from '../../context/UserContext';
 // Styling for the container box with faded background
 const FormContainer = styled(Box)({
   maxWidth: 600,
@@ -15,6 +16,7 @@ const FormContainer = styled(Box)({
 });
 
 const ContactPage = () => {
+  const {login,setLogin,setUser,user}=useContext(UserContext)
     const navigate=useNavigate()
     const [formData, setFormData] = useState({
         name: '',
@@ -33,12 +35,15 @@ const ContactPage = () => {
             
          }catch(e){
         if(e.response.data.message==='missing token'){
-            toast.error(e.response.data.message)
+            toast.error("Login Please")
             localStorage.removeItem("token");
             localStorage.removeItem("user");
-            navigate('/login')
+            setLogin(false)
+            setUser(null)
+            navigate('/login');
         }else{
             toast.error(e.response.data.message||e.message||"internal error");
+            // navigate('/');
         }
          }
         }
@@ -53,7 +58,6 @@ const ContactPage = () => {
       [name]: value
     }));
   };
-
   const handleSubmit = async(e) => {
     e.preventDefault();
     // console.log('Form submitted:', formData);
@@ -64,25 +68,30 @@ const ContactPage = () => {
   //  console.log("response is ",response);
    if(response.data.success===true){
     toast.success(response.data.message)
+    setFormData(pre=>({...pre, issue:"",
+      suggestion:""}))
     navigate('/');
    }
    else{
-    toast.success(response.data.error)
+    toast.error(response.data.message)
    }
     }catch(e){
         // console.log("error in editing details are ",e);
         if(e.response.data.message==='missing token'){
-          toast.error(e.response.data.message)
+          toast.error("please login")
           localStorage.removeItem("token");
           localStorage.removeItem("user");
-          navigate('/login')
+          setLogin(false)
+          setUser(null)
+          navigate('/')
       }else{
           toast.error(e.response.data.message||e.message||"internal error");
+          // navigate('/')
       }
     }
   };
   const handleChangeName=(()=>{
-    alert("can`t change name")
+    toast.error("can`t change name");
   })
 
   return (

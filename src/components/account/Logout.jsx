@@ -18,16 +18,19 @@ const Logout = () => {
         setLogin(false)
         setUser(null)
         toast.success(response.data.message)
-        navigate('/login');
+        navigate('/');
       } catch (e) {
         console.log("error occured in logout", e);
         if(e.response.data.message==='missing token'){
           toast.error(e.response.data.message)
           localStorage.removeItem("token");
-          localStorage.removeItem("user");
-          navigate('/login')
+        localStorage.removeItem("user");
+        setLogin(false)
+        setUser(null)
+          navigate('/')
       }else{
           toast.error(e.response.data.message||e.message||"internal error");
+          navigate('/')
       }
       }
 
