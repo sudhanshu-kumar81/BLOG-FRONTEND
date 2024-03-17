@@ -74,6 +74,10 @@ const DetailsView = () => {
    const {id}=useParams();
    console.log("user is for editing purpose",user);
    console.log("id is ",id);
+  useEffect(()=>{
+    <NavLink to={`/details/${id}`>
+    </NavLink>
+  },[]);
     useEffect(()=>{
      const getPosts=async()=>{
      try{
