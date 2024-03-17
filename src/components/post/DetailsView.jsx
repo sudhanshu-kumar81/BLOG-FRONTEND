@@ -70,14 +70,14 @@ const Description=styled(Typography)({
 const DetailsView = () => {
   const [post,setPost]=useState(null);
   const navigate=useNavigate();
-   const {user,setUser}=useContext(UserContext);
+   const {user,setUser,login,setLogin}=useContext(UserContext);
    const {id}=useParams();
    console.log("user is for editing purpose",user);
    console.log("id is ",id);
     useEffect(()=>{
      const getPosts=async()=>{
      try{
-       const response=await axios.get('http://localhost:3000/user/api/postDetails',{
+      const response=await axios.get('https://blog-backend-2-913v.onrender.com/user/api/postDetails',{
         params:{
             _id:id
         },
@@ -92,7 +92,9 @@ const DetailsView = () => {
       toast.error(e.response.data.message)
       localStorage.removeItem("token");
       localStorage.removeItem("user");
-      navigate('/login')
+      setLogin(true);
+      setUser(false);
+       navigate('/')
   }else{
       toast.error(e.response.data.message||e.message||"internal error");
   }
