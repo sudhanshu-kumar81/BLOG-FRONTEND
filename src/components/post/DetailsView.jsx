@@ -70,14 +70,14 @@ const Description=styled(Typography)({
 const DetailsView = () => {
   const [post,setPost]=useState(null);
   const navigate=useNavigate();
-   const {user,setUser,login,setLogin}=useContext(UserContext);
+   const {user,setUser}=useContext(UserContext);
    const {id}=useParams();
    console.log("user is for editing purpose",user);
    console.log("id is ",id);
     useEffect(()=>{
      const getPosts=async()=>{
      try{
-       const response=await axios.get('https://blog-backend-2-913v.onrender.com/user/api/postDetails',{
+       const response=await axios.get('http://localhost:3000/user/api/postDetails',{
         params:{
             _id:id
         },
@@ -88,18 +88,15 @@ const DetailsView = () => {
 
      }catch(e){
      console.log("error is ",e);
+     if(e.response.data.message==='missing token'){
       toast.error(e.response.data.message)
-      if(e.response.data.message==='missing token'){
-        toast.error("Login Expired");
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        setLogin(true);
-        setUser(false);
-        // navigate('/')
-    }else{
-        toast.error(e.response.data.message||e.message||"internal error");
-       
-    }
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      navigate('/login')
+  }else{
+      toast.error(e.response.data.message||e.message||"internal error");
+  }
+     
      }
       }
       getPosts();
@@ -112,9 +109,7 @@ const DetailsView = () => {
     <Container  >
       <Image id='userimg' src={post?.avatar}/>
       <Box style={{float:'right'}}>
-      {console.log(  "post?.username===user",post?.username,user)}
         {
-        
             post?.username===user&&(<>
            <NavLink to={`/edit/${post._id}`}><StyledEditIcon fontSize='large' color='primary'/></NavLink>
             <NavLink to={`/delete/${post._id}`}><StyledDeleteIcon fontSize='large' color='error'/></NavLink>
