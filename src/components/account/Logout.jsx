@@ -10,9 +10,7 @@ const Logout = () => {
   useEffect(() => {
     const tempLogout = async () => {
       try {
-        console.log("before ApI calll");
         const response = await axios.get('https://blog-backend-2-913v.onrender.com/user/api/logout', { withCredentials: true })
-        console.log("response is ", response.data.message);
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         setLogin(false)
@@ -20,7 +18,6 @@ const Logout = () => {
         toast.success(response.data.message)
         navigate('/');
       } catch (e) {
-        console.log("error occured in logout", e);
         if(e.response.data.message==='missing token'){
           toast.error(e.response.data.message)
           localStorage.removeItem("token");

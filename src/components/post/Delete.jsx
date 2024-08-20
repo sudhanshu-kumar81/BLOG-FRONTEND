@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 const Delete = () => {
     const navigate=useNavigate()
     const {id}=useParams();
-    console.log("id is ",id)
     useEffect(()=>{
    const DeletePost=async()=>{
     try{
@@ -18,9 +17,7 @@ const Delete = () => {
     })
       toast.success(response.data.message);
       navigate('/')
-    console.log("response is ",response);
     }catch(e){
-        console.log("error is ",e);
         if(e.response.data.message==='missing token'){
           toast.error("Login First")
           localStorage.removeItem("token");

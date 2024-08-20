@@ -63,7 +63,6 @@ const Createpost = () => {
       try {
         if (file) {
           const formData = new FormData();
-          console.log("formData is ",formData.avatar);
       formData.append('avatar', file);
       const response = await axios.post('https://blog-backend-2-913v.onrender.com/user/api/profile', formData, {
         headers: {
@@ -72,15 +71,11 @@ const Createpost = () => {
         withCredentials: true
 
       })
-          console.log("response is ", response);
           const responseUrl = response.data.url;
-          console.log("responseUrl", responseUrl)
           setUserDetails(prev => ({ ...prev, avatar: responseUrl, username: user, categories: location.search?.split("=")[1] }))
         }
-        console.log("userDetails", userDetails)
 
       } catch (e) {
-        console.log("error is ", e);
         if(e.response.data.message==='missing token'){
           toast.error("please Login Again");
           localStorage.removeItem("token");
@@ -93,30 +88,23 @@ const Createpost = () => {
       }
     }
     getImage();
-    console.log("userDetails", userDetails)
     
   }, [file])
   useEffect(()=>{
-    console.log(" i am your baap userDetails", userDetails)
   },[ userDetails.username, location.search])
   const changefileHandler = (e) => {
     e.preventDefault();
-    // console.log("e.target.file[0]", e.target.files[0]);
     setFile(e.target.files[0])
   }
   const changeHandler=(e)=>{
     e.preventDefault();
-    // console.log("userDetails",userDetails);
     setUserDetails(prev=>({ ...prev, [e.target.name]: e.target.value }))
   }
   const publishHandler=async()=>{
     try{
-      console.log("arrived in publish handler");
-    console.log("userderails ae",userDetails);
      const response=await axios.post('https://blog-backend-2-913v.onrender.com/user/api/savepost',userDetails,{
       withCredentials:true
      })
-     console.log("response",response);
      setUserDetails(pre=>({...pre,title:"",description:""}))
      toast.success(response.data.message);
      navigate('/');

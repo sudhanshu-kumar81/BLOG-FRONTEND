@@ -60,12 +60,10 @@ const ContactPage = () => {
   };
   const handleSubmit = async(e) => {
     e.preventDefault();
-    // console.log('Form submitted:', formData);
     try{
    const response=await axios.post('https://blog-backend-2-913v.onrender.com/user/api/saveSuggestion',formData,{
     withCredentials:true
    })
-  //  console.log("response is ",response);
    if(response.data.success===true){
     toast.success(response.data.message)
     setFormData(pre=>({...pre, issue:"",
@@ -76,7 +74,6 @@ const ContactPage = () => {
     toast.error(response.data.message)
    }
     }catch(e){
-        // console.log("error in editing details are ",e);
         if(e.response.data.message==='missing token'){
           toast.error("please login")
           localStorage.removeItem("token");

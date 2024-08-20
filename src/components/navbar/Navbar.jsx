@@ -25,7 +25,6 @@ const menuItems = [
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const navigate = useNavigate();
-  console.log("arrrived in navbar");
   const { login, setLogin, user, setUser } = useContext(UserContext)
   useEffect(()=>{
     const data=localStorage.getItem("token")
@@ -37,8 +36,6 @@ const Navbar = () => {
   },[login])
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
-    console.log("arrived in toggle menu");
-    console.log("isMenuOpen is ", isMenuOpen);
 
   }
   

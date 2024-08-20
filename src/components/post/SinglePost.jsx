@@ -38,7 +38,6 @@ const Details=styled(Typography)({
     wordBreak:'break-word',
 })
 const SinglePost = ({post}) => {
-  console.log("post is i post function ",post);
   return (
      <Container>
         <Image src={post.avatar} alt='blog'/>

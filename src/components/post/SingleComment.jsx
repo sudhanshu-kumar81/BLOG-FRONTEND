@@ -51,7 +51,6 @@ import { toast } from 'react-toastify'
 const SingleComment = ({ comment, setToggle }) => {
   const navigate = useNavigate();
   const id = comment._id;
-  console.log("id is", id);
 
   const { user,setUser,setLogin } = useContext(UserContext)
   const deleteHandler = async (e) => {
@@ -62,10 +61,8 @@ const SingleComment = ({ comment, setToggle }) => {
         },
         withCredentials: true
       })
-      console.log("response is ", response);
       setToggle(pre => !pre)
     } catch (e) {
-      console.log("e in deleting component", e);
       if (e.response.data.message === 'missing token') {
         toast.error("Login to delete")
         localStorage.removeItem("token");

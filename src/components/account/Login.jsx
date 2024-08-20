@@ -57,8 +57,6 @@ const Login = () => {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({ email: "", password: "", name: "" })
     const changeSignupHandler = (e) => {
-        console.log(formData)
-        console.log(e.target.value);
         setFormData(prev => {
             return { ...prev, [e.target.name]: e.target.value }
         })
@@ -71,8 +69,6 @@ const Login = () => {
         try {
             // e.preventDefault();
             const response = await axios.post('https://blog-backend-2-913v.onrender.com/user/api/register', formData);
-            console.log("response is ", response);
-            console.log(response);
             if (response.data.success === true) {
                 toast.success(response.data.message)
                 toggleSignup();
@@ -87,26 +83,18 @@ const Login = () => {
             // navigate('/')
         }
     }
-    useEffect(()=>{
-        console.log("user after login is ",user);
-    })
+
     const LoginHandler = async (e) => {
-        console.log("arrived in login")
         try {
             // e.preventDefault();
             const response = await axios.post('https://blog-backend-2-913v.onrender.com/user/api/login', formData, {
                 withCredentials: true
             });
-            console.log("response is ", response);
-            console.log(response);
             if (response.data.success === true) {
-                console.log("response.data.user.name", response.data.user.name)
                 localStorage.setItem("token", response.data.token)
                 localStorage.setItem("user", response.data.user.name)
                 setLogin(true)
-                console.log("response.data.user.name",response.data.user.name);
                 setUser(response.data.user.name)
-                console.log("user after login is ",user);
                 toast.success("login successfully")
                 navigate('/')
 
@@ -115,8 +103,6 @@ const Login = () => {
                 toast.error(response.data.message)
             }
         } catch (e) {
-
-            console.log("resopnse in error", e);
             toast.error(e.response.data.message || e.message || "internal error");
             // navigate('/login')
         }

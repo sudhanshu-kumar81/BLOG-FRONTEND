@@ -72,8 +72,6 @@ const DetailsView = () => {
   const navigate=useNavigate();
    const {user,setUser,login,setLogin}=useContext(UserContext);
    const {id}=useParams();
-   console.log("user is for editing purpose",user);
-   console.log("id is ",id);
     useEffect(()=>{
      const getPosts=async()=>{
      try{
@@ -83,12 +81,9 @@ const DetailsView = () => {
         },
         withCredentials:true
        })
-       console.log("response is in useEffet from DetailsView`s getPost",response);
        setPost(response.data.posts);
 
      }catch(e){
-     console.log("error is ",e);
-      // toast.error(e.response.data.message)
       if(e.response.data.message==='missing token'){
         toast.error("Login Expired");
         localStorage.removeItem("token");
@@ -104,9 +99,6 @@ const DetailsView = () => {
       }
       getPosts();
     },[]);
-    useEffect(()=>{
-        console.log("post is ",post);
-    },[])
   return (
     
     <Container  >

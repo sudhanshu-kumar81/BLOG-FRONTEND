@@ -54,27 +54,20 @@ const Comments = ({ post }) => {
     const [allComment, setAllComment] = useState([]);
     const navigate = useNavigate();
     const { login,setLogin,user,setUser} = useContext(UserContext);
-    console.log("user is ", user);
-    console.log("postId is ", post?._id);
     const [comment, setComment] = useState({ name: user, postId: post?._id, comments: '', date: new Date() })
     const url = 'https://static.thenounproject.com/png/12017-200.png'
     const handleChange = (e) => {
-        // console.log("comment is ", comment);
         e.preventDefault();
         setComment(pre => ({ ...pre, name: user, postId: post._id, comments: e.target.value, date: new Date() }))
     }
     const addComment = async (e) => {
         try {
-            console.log("entered add comment");
-            console.log(comment);
             const response = await axios.post('https://blog-backend-2-913v.onrender.com/user/api/addComment', comment, {
                 withCredentials: 'true'
             })
-            // console.log("response");
             setComment(prev=>({...prev,comments:""}))
             setToggle(prev => !prev)
         } catch (e) {
-            // console.log("error is ", e);
             if (e.response.data.message === 'missing token') {
                 toast.error("Login To comment")
                 localStorage.removeItem("token");
@@ -96,18 +89,14 @@ const Comments = ({ post }) => {
                     },
                     withCredentials: true
                 })
-                console.log("response is ", response);
                 setAllComment(response.data.comment)
             } catch (e) {
-                console.log("error is ", e);
                 //  toast.error(e.response.data.message)   
             }
         }
         getALLComments()
     }, [post, toggle]);
     useEffect(() => {
-        console.log("allComment is ", allComment)
-        console.log("allComment length is ", allComment.length)
     }, [toggle])
     return (
         <MainContainer>

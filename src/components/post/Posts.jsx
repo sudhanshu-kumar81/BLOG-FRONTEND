@@ -13,7 +13,6 @@ const Posts = () => {
   const [searchParams]=useSearchParams();
   const navigate=useNavigate();
   useEffect(() => {
-    console.log("category is ",category);
     const getAllPost = async () => {
       try {
         const response = await axios.get('https://blog-backend-2-913v.onrender.com/user/api/getAllPosts',{
@@ -22,11 +21,8 @@ const Posts = () => {
           },
           withCredentials: true
         })
-        console.log("response.data.posts",response.data.posts);
-        console.log("final step");
         setPost(response.data.posts);
       } catch (e) {
-        console.log("error is ", e);
         if(e.response.data.message==='missing token'){
           // toast.error(e.response.data.message)
           localStorage.removeItem("token");
